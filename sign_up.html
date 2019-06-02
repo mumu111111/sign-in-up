@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>注册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body{
+            border: 1px solid #eee;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        form-wrapper{
+            padding: 20px;
+            border: 1px solid #ddd;
+            min-width: 350px;
+        }
+        .form-wrapper .row{
+            magin: 10px 0;
+        }
+        .form-wrapper .row>label {
+            display: inline-block;
+            min-width: 4em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-wrapper">
+        <h1>注册</h1>
+        <form action="" class="signUpForm">
+            <div class="row">
+                <label>邮箱</label>
+                <input type="text" name="email">
+                <span class="error"></span>
+            </div>
+            <div class="row">
+                <label>密码</label>
+                <input type="text" name="password">
+                <span class="error"></span>
+            </div>
+            <div class="row">
+                <label>确认密码</label>
+                <input type="text" name="password_confirmation">
+                <span class="error"></span>
+            </div>
+            <div class="row">
+                <input type="submit" value="注册">
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</body>
+
+</html>
