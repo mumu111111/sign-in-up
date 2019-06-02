@@ -61,6 +61,59 @@
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        //点击注册 获取输入的所有信息  传给服务器
+
+        let $form = $('.signUpForm')
+        $form.on('submit', (e) => {
+            e.preventDefault()
+            let hash = {}
+            //获取所有input中的数据  
+            let needs = ['email', 'password', 'password_confirmation']
+            needs.forEach((name) => {
+                let value = $form.find(`[name=${name}]`).val()
+                hash[name] = value
+            })
+
+            $form.find('.error').each((index, span) => {
+                $(span).text('')
+            })
+            //在请求之前 做前端验证  验证为空  密码是否一致
+            if (hash['email'] === '') {
+                $form.find('[name="email"]').siblings('.error')
+                    .text('填邮箱啊同学')
+                return
+            }
+            if (hash['password'] === '') {
+                $form.find('[name="password"]').siblings('.error')
+                    .text('填密码啊同学')
+                return
+            }
+            if (hash['password_confirmation'] === '') {
+                $form.find('[name="password_confirmation"]').siblings('.error')
+                    .text('填确认密码啊同学')
+                return
+            }
+            if (hash['password'] !== hash['password_confirmation']) {
+                $form.find('[name="password_confirmation"]').siblings('.error')
+                    .text('密码不匹配啊同学')
+                return
+            }
+            $.post('/sign_up', hash)
+                .then((response) => {//成功
+                    console.log(response)
+                },
+                (request) => {//失败
+                    let { errors } = request.responseJSON  //JSON对象
+                    if (errors.email && errors.email === 'invalid') {
+                        $form.find('[name="email"]').siblings('.error')
+                            .text('邮箱格式错误')
+                    }
+                })
+
+        })
+    </script>
+
 </body>
 
 </html>
